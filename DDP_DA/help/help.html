@@ -1,0 +1,483 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+  <title>Shiny - Getting started with ShinyApps.io</title>
+  <meta property='st:title' content='Getting started with ShinyApps.io'/>
+  <link rel="stylesheet" type="text/css" href="/lib/bootstrap/bootstrap.min.css"/>
+  <script src="/lib/highlight.min.js"></script>
+  <script src="/lib/jquery-1.10.2.min.js"></script>
+  <script src="/lib/bootstrap/bootstrap.min.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400" rel="stylesheet" type="text/css">
+  <link href="/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" type="text/css" href="/css/global.css"/>
+  <script src="/lib/respond/respond.min.js"></script>
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-20375833-9', 'rstudio.com');
+    ga('require', 'linkid', 'linkid.js');
+    ga('send', 'pageview');
+  </script>
+</head>
+<body>
+  <div class="header">
+  <div class="container brand">
+    <div class="search pull-right">
+      <form>
+        <input id="st-search-input" type="text" class="form-control input-sm" placeholder="Search">
+<script type="text/javascript">
+  var Swiftype = window.Swiftype || {};
+    (function() {
+      Swiftype.key = 'PeTiSRv94X52JCzFyMzF';
+      Swiftype.disableAutocomplete = true;        
+      /** DO NOT EDIT BELOW THIS LINE **/
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = "//swiftype.com/embed.js";
+      var entry = document.getElementsByTagName('script')[0];
+      document.getElementsByTagName('script')[0].parentNode.insertBefore(script, entry);
+    }());
+</script>
+
+      </form>
+    </div>
+    <a href="/">Shiny</a>
+    <span id="credits">by <a href="http://www.rstudio.com/">RStudio</a></span>
+  </div>
+</div>
+<div class="container content">
+  <div class="row">
+    <div class="col-md-2 col-sm-12">
+      <div class="nav nav-primary punchup">
+        <ul class="list-unstyled">
+          <li><a href="/">Overview</a></li>
+          <li><a href="/tutorial/">Tutorial</a></li>
+          <li class="active"><a href="/articles/">Articles</a></li>
+          <li><a href="/gallery/">Gallery</a></li>
+          <li><a href="/reference/shiny/latest">Reference</a></li>
+          <li><a href="/deploy/">Deploy</a></li>
+          <li><a href="/help/">Help</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-md-10 col-sm-12">
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+  <h1>Getting started with ShinyApps.io</h1>
+  <div class="metadata punchup">
+    <span class="published">Added: 18 Mar 2014</span>
+    
+    <br>
+    <span>By: Andy Kipp</span>
+    
+  </div>
+</div>
+<div class="col-md-8 col-sm-12">
+  <div class="post constrain-image-width">
+  <p>ShinyApps.io is a platform as a service (PaaS) for hosting Shiny web apps (applications). This guide will show you how to create a ShinyApps.io account and deploy your first application to the cloud. </p>
+
+<p>Before you get started with ShinyApps.io, you will need:</p>
+
+<ul>
+  <li>An R development environment, such as the RStudio IDE</li>
+  <li>(<em>for Windows users only</em>) <a href="http://cran.r-project.org/bin/windows/Rtools/">RTools</a> for building packages</li>
+  <li>(<em>for Mac users only</em>)  XCode Command Line Tools for building packages</li>
+  <li>(<em>for Linux users only</em>)  GCC</li>
+  <li>The <a href="https://github.com/hadley/devtools">devtools</a> R package (version 1.4 or later)</li>
+  <li>The latest version of the <a href="https://github.com/rstudio/shinyapps">shinyapps</a> R package</li>
+</ul>
+
+<h3 id="how-to-install-devtools">How to install <code>devtools</code></h3>
+
+<p>ShinyApps.io uses the latest improvements to the <code>devtools</code> package. To use ShinyApps.io, you must update <code>devtools</code> to version 1.4 or later. To install <code>devtools</code> from CRAN, run the code below. Then restart your R session.</p>
+
+<pre><code>install.packages('devtools')
+</code></pre>
+
+<h3 id="how-to-install-shinyapps">How to install <code>shinyapps</code></h3>
+
+<p>The <code>shinyapps</code> package deploys applications to the ShinyApps.io service. Currently, you need to install the <code>shinyapps</code> package from its development page at Github. You can do this by running the R command:</p>
+
+<pre><code>devtools::install_github('rstudio/shinyapps')
+</code></pre>
+
+<p>After the <code>shinyapps</code> package has been installed, load it into your R session:</p>
+
+<pre><code>library(shinyapps)
+</code></pre>
+
+<h2 id="create-a-shinyappsio-account">Create a ShinyApps.io account</h2>
+
+<p>Go to <a href="https://www.shinyapps.io">shinyapps.io</a> and click “Sign In.” The site will ask you to sign in using  your Google Account. </p>
+
+<p>The first time you sign in, ShinyApps.io prompts you to setup your account. ShinyApps.io uses the account name as the domain name for all your apps. Account names must be between four and 63 characters and can contain only letters, numbers, and dashes (-). Account names may not begin with a number or a dash, and they can not end with a dash (see <a href="http://tools.ietf.org/html/rfc952">RFC 952</a>). Some account names may be reserved.</p>
+
+<h3 id="configure-shinyapps">Configure <code>shinyapps</code></h3>
+
+<p>Once you set up your account in ShinyApps.io, you can configure the <code>shinyapps</code> package to use your account. ShinyApps.io automatically generates a token and secret for you, which the <code>shinyapps</code> package can use to access your account. Retrieve your token from the ShinyApps.io dashboard. Tokens are listed under <code>Tokens</code> in the menu at the top right of the ShinyApps dashboard (under your avatar). </p>
+
+<p><img src="/images/tokens.png" alt="Tokens" /></p>
+
+<p>You can configure the <code>shinyapps</code> package to use your account with two methods:</p>
+
+<h4 id="method-1">Method 1</h4>
+
+<p>Click the show button on the token page. A window will pop up that shows the full command to configure your account using the appropriate parameters for the <code>shinyapps::setAccountInfo</code> function. Copy this command to your clip board, and then paste it into the command line of RStudio and click enter.</p>
+
+<p><img src="/images/tokens2.png" alt="Tokens" /></p>
+
+<h4 id="method-2">Method 2</h4>
+
+<p>Run the ‘setAccountInfo’ function from the <code>shinyapps</code> package passing in the token and secret from the Profile / Tokens page.</p>
+
+<pre><code>shinyapps::setAccountInfo(name="&lt;ACCOUNT&gt;", token="&lt;TOKEN&gt;", secret="&lt;SECRET&gt;")
+</code></pre>
+
+<p>Once you have configured your <code>shinyapps</code> installation, you can use it to upload applications to ShinyApps.io. In the second part of this guide, we will build a demo application, upload it to ShinyApps.io, and create a password for the application.</p>
+
+<h2 id="a-demo-app">A Demo app</h2>
+
+<p>For this guide, we created an RStudio project named “demo” that contains a Shiny application to upload to ShinyApps.io. Follow these steps to create your own Shiny app.</p>
+
+<h3 id="install-application-dependencies">Install application dependencies</h3>
+
+<p>The demo application we will deploy requires the <code>ggplot2</code> package and the <code>shiny</code> package. Ensure that any package required by your application is installed locally before you deploy your application:</p>
+
+<pre><code>install.packages(c('ggplot2', 'shiny'))
+</code></pre>
+
+<h3 id="uir-and-serverr"><code>ui.R</code> and <code>server.R</code></h3>
+
+<p>We placed two Shiny source files, <code>ui.R</code> and <code>server.R</code>, in our demo application. You can cut and paste the code below to make your own Shiny application:</p>
+
+<p><strong>server.R</strong></p>
+
+<div class="highlight"><pre><code class="r">library<span class="p">(</span>shiny<span class="p">)</span>
+library<span class="p">(</span>ggplot2<span class="p">)</span>
+
+shinyServer<span class="p">(</span><span class="kr">function</span><span class="p">(</span>input<span class="p">,</span> output<span class="p">)</span> <span class="p">{</span>
+
+  dataset <span class="o">&lt;-</span> reactive<span class="p">(</span><span class="kr">function</span><span class="p">()</span> <span class="p">{</span>
+    diamonds<span class="p">[</span>sample<span class="p">(</span>nrow<span class="p">(</span>diamonds<span class="p">),</span> input<span class="o">$</span>sampleSize<span class="p">),]</span>
+  <span class="p">})</span>
+
+  output<span class="o">$</span>plot <span class="o">&lt;-</span> reactivePlot<span class="p">(</span><span class="kr">function</span><span class="p">()</span> <span class="p">{</span>
+
+    p <span class="o">&lt;-</span> ggplot<span class="p">(</span>dataset<span class="p">(),</span> aes_string<span class="p">(</span>x<span class="o">=</span>input<span class="o">$</span>x<span class="p">,</span> y<span class="o">=</span>input<span class="o">$</span>y<span class="p">))</span> <span class="o">+</span> geom_point<span class="p">()</span>
+
+    <span class="kr">if</span> <span class="p">(</span>input<span class="o">$</span>color <span class="o">!=</span> <span class="s">&#39;None&#39;</span><span class="p">)</span>
+      p <span class="o">&lt;-</span> p <span class="o">+</span> aes_string<span class="p">(</span>color<span class="o">=</span>input<span class="o">$</span>color<span class="p">)</span>
+
+    facets <span class="o">&lt;-</span> paste<span class="p">(</span>input<span class="o">$</span>facet_row<span class="p">,</span> <span class="s">&#39;~&#39;</span><span class="p">,</span> input<span class="o">$</span>facet_col<span class="p">)</span>
+    <span class="kr">if</span> <span class="p">(</span>facets <span class="o">!=</span> <span class="s">&#39;. ~ .&#39;</span><span class="p">)</span>
+      p <span class="o">&lt;-</span> p <span class="o">+</span> facet_grid<span class="p">(</span>facets<span class="p">)</span>
+
+    <span class="kr">if</span> <span class="p">(</span>input<span class="o">$</span>jitter<span class="p">)</span>
+      p <span class="o">&lt;-</span> p <span class="o">+</span> geom_jitter<span class="p">()</span>
+    <span class="kr">if</span> <span class="p">(</span>input<span class="o">$</span>smooth<span class="p">)</span>
+      p <span class="o">&lt;-</span> p <span class="o">+</span> geom_smooth<span class="p">()</span>
+
+    print<span class="p">(</span>p<span class="p">)</span>
+
+  <span class="p">},</span> height<span class="o">=</span><span class="m">700</span><span class="p">)</span>
+
+<span class="p">})</span>
+</code></pre></div>
+
+<p><strong>ui.R</strong></p>
+
+<div class="highlight"><pre><code class="r">library<span class="p">(</span>shiny<span class="p">)</span>
+library<span class="p">(</span>ggplot2<span class="p">)</span>
+
+dataset <span class="o">&lt;-</span> diamonds
+
+shinyUI<span class="p">(</span>pageWithSidebar<span class="p">(</span>
+
+  headerPanel<span class="p">(</span><span class="s">&quot;Diamonds Explorer&quot;</span><span class="p">),</span>
+
+  sidebarPanel<span class="p">(</span>
+
+    sliderInput<span class="p">(</span><span class="s">&#39;sampleSize&#39;</span><span class="p">,</span> <span class="s">&#39;Sample Size&#39;</span><span class="p">,</span> min<span class="o">=</span><span class="m">1</span><span class="p">,</span> max<span class="o">=</span>nrow<span class="p">(</span>dataset<span class="p">),</span>
+                value<span class="o">=</span>min<span class="p">(</span><span class="m">1000</span><span class="p">,</span> nrow<span class="p">(</span>dataset<span class="p">)),</span> step<span class="o">=</span><span class="m">500</span><span class="p">,</span> round<span class="o">=</span><span class="m">0</span><span class="p">),</span>
+
+    selectInput<span class="p">(</span><span class="s">&#39;x&#39;</span><span class="p">,</span> <span class="s">&#39;X&#39;</span><span class="p">,</span> names<span class="p">(</span>dataset<span class="p">)),</span>
+    selectInput<span class="p">(</span><span class="s">&#39;y&#39;</span><span class="p">,</span> <span class="s">&#39;Y&#39;</span><span class="p">,</span> names<span class="p">(</span>dataset<span class="p">),</span> names<span class="p">(</span>dataset<span class="p">)[[</span><span class="m">2</span><span class="p">]]),</span>
+    selectInput<span class="p">(</span><span class="s">&#39;color&#39;</span><span class="p">,</span> <span class="s">&#39;Color&#39;</span><span class="p">,</span> c<span class="p">(</span><span class="s">&#39;None&#39;</span><span class="p">,</span> names<span class="p">(</span>dataset<span class="p">))),</span>
+
+    checkboxInput<span class="p">(</span><span class="s">&#39;jitter&#39;</span><span class="p">,</span> <span class="s">&#39;Jitter&#39;</span><span class="p">),</span>
+    checkboxInput<span class="p">(</span><span class="s">&#39;smooth&#39;</span><span class="p">,</span> <span class="s">&#39;Smooth&#39;</span><span class="p">),</span>
+
+    selectInput<span class="p">(</span><span class="s">&#39;facet_row&#39;</span><span class="p">,</span> <span class="s">&#39;Facet Row&#39;</span><span class="p">,</span> c<span class="p">(</span>None<span class="o">=</span><span class="s">&#39;.&#39;</span><span class="p">,</span> names<span class="p">(</span>dataset<span class="p">))),</span>
+    selectInput<span class="p">(</span><span class="s">&#39;facet_col&#39;</span><span class="p">,</span> <span class="s">&#39;Facet Column&#39;</span><span class="p">,</span> c<span class="p">(</span>None<span class="o">=</span><span class="s">&#39;.&#39;</span><span class="p">,</span> names<span class="p">(</span>dataset<span class="p">)))</span>
+  <span class="p">),</span>
+
+  mainPanel<span class="p">(</span>
+    plotOutput<span class="p">(</span><span class="s">&#39;plot&#39;</span><span class="p">)</span>
+  <span class="p">)</span>
+<span class="p">))</span>
+</code></pre></div>
+
+<!-- ![Project](/images/project.png) -->
+
+<h3 id="test-your-application">Test your application</h3>
+
+<p>Test that your application works by running it locally. Set your <a href="http://www.rstudio.com/ide/docs/using/workspaces">working directory</a> to your app directory, and then run:</p>
+
+<pre><code>library(shiny)
+runApp()
+</code></pre>
+
+<p>Now that the application works, let’s upload it to ShinyApps.io.</p>
+
+<h2 id="deploying-apps">Deploying apps</h2>
+
+<p>To deploy your application, use the <code>deployApp</code> command from the <code>shinyapps</code> packages.</p>
+
+<pre><code>library(shinyapps)
+deployApp()
+</code></pre>
+
+<p><img src="/images/deploy.png" alt="Deploy" /></p>
+
+<p>Once the deployment finishes, your browser should open automatically to your newly deployed application.</p>
+
+<p>Congratulations! You’ve deployed your first application. :-)</p>
+
+<p>Feel free to make changes to your code and run <code>deployApp</code> again. <code>shinyapps</code> can deploy an app much more quickly after the first deployment.</p>
+
+<h3 id="package-dependencies">Package dependencies</h3>
+
+<p>When you deploy your application, the <code>shinyapps</code> package attempts to detect the packages that your application uses. <code>shinyapps</code> sends this list of packages and their dependencies along with your application to the ShinyApps.io service. Then ShinyApps.io builds and installs the packages into the R library for your application. The first time you deploy your application, it may take some time to build these packages (depending on how many packages are used). However, you will not wait for these packages to build during future deployments (unless you upgrade or downgrade a package).</p>
+
+<p>For more information on application package dependencies, see the documentation for the <a href="https://github.com/rstudio/shinyapps">shinyapps</a> package.</p>
+
+<!--- Any more specific links? (Or is it not written yet?) This seems important. -->
+
+<h3 id="package-sources">Package sources</h3>
+
+<p>Currently the ShinyApps.io service supports deploying packages installed from CRAN and GitHub. Soon it will support BioConductor and R-Forge packages.</p>
+
+<h4 id="important-note-on-github-packages">Important note on GitHub packages</h4>
+
+<p>Only packages installed from GitHub with <code>devtools::install_github</code> in version 1.4 (or later) of <code>devtools</code> are supported. Packages installed with an earlier version of <code>devtools</code> must be reinstalled before you can deploy your application. <strong>If you get an error such as “PackageSourceError” when you attempt to deploy, check that you have installed any package from Github with <code>devtools</code> 1.4 or later.</strong></p>
+
+<h3 id="application-instances">Application instances</h3>
+
+<p>ShinyApps.io hosts each app on its own virtualized server, called an instance. Each instance runs an identical copy of the code and packages that you deployed (called the image).</p>
+
+<p>When you deploy an app, ShinyApps.io creates a new image with the updated code and packages, and starts one or more instances with the new image. If the app was previously deployed, ShinyApps.io shuts down and destroys the old instances. Consider a few implications of this arrangement:</p>
+
+<p>1) <strong>Data written by an application to the local filesystem of an instance will be lost when you re-deploy the app.</strong> Additionally, the distributed nature of the ShinyApps.io platform means that instances may be shut down and re-created at any time for maintenance or to recover from server failures.</p>
+
+<p>2) It is possible to have more than one instance of an application. This situation means that <strong>multiple instances of an application do not share a local filesystem</strong>. A file written to one instance will not be available to another instance.</p>
+
+<p>ShinyApps.io limits the amount of system resources an instance can consume. The amount of resources available to an instance will depend on its type. The table below outlines the various instance types and how much memory is allowed. <strong>By default, ShinyApps.io deploys all applications on ‘small’ instances, which are allowed to use 256 MB of memory.</strong></p>
+
+<table>
+  <tr>
+    <th>
+    Instance Type
+    </th>
+    <th>
+    Memory
+    </th>
+  </tr>
+  <tr>
+    <td>
+    small (default)
+    </td>
+    <td>
+    256 MB
+    </td>
+  </tr>
+  <tr>
+    <td>
+    medium
+    </td>
+    <td>
+    512 MB
+    </td>
+  </tr>
+  <tr>
+    <td>
+    large
+    </td>
+    <td>
+    1024 MB
+    </td>
+  </tr>
+  <tr>
+    <td>
+    xlarge
+    </td>
+    <td>
+    2048 MB
+    </td>
+  </tr>
+  <tr>
+    <td>
+    xxlarge
+    </td>
+    <td>
+    4096 MB
+    </td>
+  </tr>
+</table>
+
+<p><em>Note: Instance types and limits are not finalized; RStudio may change them in the future.</em></p>
+
+<h3 id="configuring-applications">Configuring applications</h3>
+
+<p>You can change the instance type used by an application with the <code>configureApp</code> function from the <code>shinyapps</code> package. To change the instance type of your application (here from small to medium), run:</p>
+
+<pre><code>shinyapps::configureApp("APPNAME", size="medium")
+</code></pre>
+
+<p>This change will redeploy your application using the medium instance type.</p>
+
+<h2 id="application-authentication-passwords">Application authentication (passwords)</h2>
+
+<p>With ShinyApps.io, you can limit the access to your application by configuring authentication. ShinyApps.io will prompt each visitor to your app for a username and password when authentification is enabled.Only users who log-in with valid credentials will be able to view or use the app. ShinyApps.io enables authentication automatically when you add the first authorized user to an app.</p>
+
+<p>To get started, you need to prepare your system to build native packages. Before continuing, please ensure you installed these tools for your system:</p>
+
+<ul>
+  <li>Windows: <a href="http://cran.r-project.org/bin/windows/Rtools/">RTools</a> </li>
+  <li>Mac OSX: XCode Command Line Tools </li>
+  <li>Linux: GCC</li>
+</ul>
+
+<p>You will also need the <code>scrypt</code> package used for encrypting passwords.To install the <code>scrypt</code> package using <code>devtools</code>:</p>
+
+<div class="highlight"><pre><code class="r">devtools<span class="o">::</span>install_github<span class="p">(</span><span class="s">&#39;rstudio/rscrypt&#39;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>You should restart your R session at this point, if you already had the <code>shinyapps</code> package installed. <strong>Note: that authentification requires <code>shinyapps</code> version 0.3 or greater</strong>.</p>
+
+<h3 id="add-an-authorized-user">Add an authorized user</h3>
+
+<p>The <code>shinyapps</code> package provides a number of functions for managing an application’s authorized users. Before you use them, change your working directory to where your application code resides:</p>
+
+<div class="highlight"><pre><code class="r">setwd<span class="p">(</span><span class="s">&quot;/path/to/my/shiny/app&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>To add an authorized user, use the <code>shinyapps::addAuthorizedUser</code> function. The code below will add an authorized user whose username is “andy”.</p>
+
+<div class="highlight"><pre><code class="r">addAuthorizedUser<span class="p">(</span><span class="s">&quot;andy&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>After you run <code>addAuthorizedUser</code>, R will prompt you to enter a password for the user. Passwords must be at least four characters in length, and may not contain: <code>\t</code>, <code>\n</code>, <code>$</code> or <code>:</code>.</p>
+
+<p>Please remember that passwords are stored using a <a href="http://en.wikipedia.org/wiki/Scrypt">scrypt</a> hash for security. Once stored, passwords can not be retrieved (but they can always be reset).</p>
+
+<p>You can add multiple authorized users to an app by running <code>addAuthorizedUser</code> multiple times.</p>
+
+<p>After adding or removing a user, you need to deploy your application using the <code>shinyapps::deployApp</code> function.</p>
+
+<div class="highlight"><pre><code class="r">deployApp<span class="p">()</span>
+</code></pre></div>
+
+<p>That’s it. ShinyApps.io will now prompt your users for a username and password when they visit your app.</p>
+
+<p>If a user forgets his or her password, you can reset it using the <code>shinyapps::addAuthorizedUser</code> function. You will be prompted to confirm you want to reset the user’s password.</p>
+
+<h3 id="remove-an-authorized-user">Remove an authorized user</h3>
+
+<p>To remove an authorized user, use the <code>shinyapps::removeAuthorizedUser</code> function.</p>
+
+<div class="highlight"><pre><code class="r">removeAuthorizedUser<span class="p">(</span><span class="s">&quot;andy&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>The remember to re-deploy your app with <code>shinyapps::deployApp</code>.</p>
+
+<h2 id="terminate-an-app">Terminate an app</h2>
+
+<p>You can remove an app on ShinyApps.io from the web with the <code>terminateApp</code> command. To use it, run</p>
+
+<div class="highlight"><pre><code class="r">terminateApp<span class="p">(</span><span class="s">&quot;&lt;your app&#39;s name&gt;&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p><code>terminateApp</code> requires one argument, the name of the app that you would like to terminate (as a character string). This name should correspond with one of the apps in your ShinyApps.io account.</p>
+
+<p>When you run <code>terminateApp</code> ShinyApps.io will close your app, but the app will remain archived in your ShinyApps.io account. This creates efficiencies if you later decide to redeploy your app with <code>deployApp</code>.</p>
+
+<h2 id="getting-help">Getting help</h2>
+
+<p>To seek and share advice about ShinyApps.io, please visit the <a href="https://groups.google.com/forum/?hl=en#!forum/shinyapps-users">ShinyApps google group</a>.</p>
+
+<h2 id="recap">Recap</h2>
+
+<p>ShinyApps.io is an online service for hosting Shiny apps in the cloud. RStudio takes care of all of the details of hosting the app and maintaining the server, which lets you focus on writing great apps!</p>
+
+<p>To use ShinyApps.io</p>
+
+<ul>
+  <li>Install the <a href="https://github.com/rstudio/shinyapps">shinyapps</a> R package from github</li>
+  <li>Create an account at <a href="https://www.shinyapps.io">shinyapps.io</a></li>
+  <li>Use the tokens generated by ShinyApps.io to configure your <code>shinyapps</code> package.</li>
+  <li>Deploy apps with <code>shinyapps::deployApp</code></li>
+  <li>Terminate apps with <code>shinyapps::terminateApp</code></li>
+</ul>
+
+<p>You can also use ShinyApps.io to create password protected apps, and manage your authorized users.</p>
+
+  </div>
+  
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+var disqus_shortname = 'shiny-rstudio'; // required: replace example with your forum shortname
+
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function() {
+var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+<div class="col-md-2 col-sm-12 article-actions punchup">
+  <div class="row">
+    <div class="visible-sm"><br/></div>
+    
+    
+  </div>
+</div>
+
+  </div>
+</div>
+<div class="footer">
+  <div class="footer-inner">
+    Shiny is an <a href="http://www.rstudio.com">RStudio</a> project.
+    &copy; 2014 RStudio, Inc.
+  </div>
+</div>
+
+
+</body>
+</html>
